@@ -1,6 +1,6 @@
 # Rutgers Companion Accessibility Tool for Ally
 
-##What is Companion?
+## What is Companion?
 Created by the uOttawa Gee-Gees Companion Dev Team
 
 ## How to Run
