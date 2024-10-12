@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap');
+
+:root {
+  font-family: "Sofia Sans", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #FFFFFF;
+  background-color: #1F1F1F;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /**Style Variables **/
+  --rutgers-red: #CC0033;
+
+  --background-dark: #1f1f1f;
+  --white-main: #FFFFFF;
+
+  --white-deep: #DDDDDD;
+  --dark-deep: #2f2f2f;
+
+  --main-font: "Sofia Sans", sans-serif;
+
+}
