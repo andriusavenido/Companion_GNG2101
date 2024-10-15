@@ -16,6 +16,7 @@
 
   /**Style Variables **/
   --rutgers-red: #CC0033;
+  --rutgers-shadow-red: #821933;
 
   --background-dark: #1f1f1f;
   --white-main: #FFFFFF;
@@ -25,4 +26,9 @@
 
   --main-font: "Sofia Sans", sans-serif;
 
+}
+
+body{
+  margin: 0px;
+  padding: 0px;
 }

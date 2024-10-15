@@ -1,14 +1,24 @@
 import './App.css'
-import { ReactSVG } from 'react-svg'
-import testSVG from './assets/svg/Chat.svg'
+import Navbar from './components/Navbar/Navbar'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Home from './pages/Home/Home';
+import About from './pages/About/About';
 
 function App() {
 
   return (
-    <>
-    <ReactSVG src={testSVG}></ReactSVG>
-      <p>hello world</p>
-    </>
+    <Router>
+       <div className="topWrapper">
+       <Navbar></Navbar>
+       <div className="pages">
+        <Routes>
+          <Route path = "/" element = {<Home></Home>}></Route>
+          <Route path = "/about" element = {<About></About>}></Route>
+        </Routes>
+       </div>
+      </div> 
+      </Router>
+    
   )
 }
 
