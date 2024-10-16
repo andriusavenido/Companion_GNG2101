@@ -46,19 +46,19 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/" className={styles.menuLink}>
+            <Link to="/history" className={styles.menuLink}>
               <ReactSVG src={history} />
               {isExpanded && <span>History</span>}
             </Link>
           </li>
           <li>
-            <Link to="/" className={styles.menuLink}>
+            <Link to="/accessibility" className={styles.menuLink}>
               <ReactSVG src={info} />
               {isExpanded && <span>Learn about Accessibility</span>}
             </Link>
           </li>
           <li>
-            <Link to="/" className={styles.menuLink}>
+            <Link to="/login" className={styles.menuLink}>
               <ReactSVG src={userIcon} />
               {isExpanded && <span>Login</span>}
             </Link>
