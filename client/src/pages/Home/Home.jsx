@@ -130,7 +130,7 @@ const Home = () => {
       </div>
       {uploadedFile && (
         <button className={styles.deleteButton} onClick={clearUpLoadedFile}>
-          Delete
+          Delete uploaded file
         </button>
       )}
     </div>

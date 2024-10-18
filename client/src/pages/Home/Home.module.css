@@ -71,3 +71,21 @@
     width: 1000px;
 }
 
+.deleteButton{
+    width: 10rem;
+    margin:0 auto;
+    border-bottom: none;
+    background-color: var(--dark-deep);
+    border-radius: 5px;
+    border:none;
+    font-weight: 100;
+    font-size: 14px;
+    font-family: var(--main-font);
+    cursor: pointer;
+}
+
+.deleteButton:hover, .fileDrop:hover{
+    background-color: var(--lighter-dark);
+}
+
+
