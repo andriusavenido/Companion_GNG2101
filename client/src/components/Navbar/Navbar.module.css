@@ -48,7 +48,7 @@
 }
 
 button:hover,
-li:hover, .aboutLink:hover {
+.menu li:hover, .aboutLink:hover {
     background-color: var(--rutgers-shadow-red);
 }
 

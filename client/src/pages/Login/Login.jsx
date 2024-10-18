@@ -29,7 +29,7 @@ const Login = () => {
         <div className={styles.LoginBox}>
             {view === '' && (
                 <div>
-                    <h2>Login / SignUp form</h2>
+                    <h2>Login / Sign Up form</h2>
                     <div className={styles.ButtonContainer}>
                         <button onClick={showLogin} className={styles.Button}>Login</button>
                         <button onClick={showRegister} className={styles.Button}>Register</button>

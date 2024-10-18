@@ -11,4 +11,12 @@
   justify-content: center;
   margin: 0 auto;
   height: 100%;
+  min-width: 300px;
+}
+
+@media (max-width: 600px) {
+  .chat-container {
+    min-width: 100%; /* Take full width on smaller screens */
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
 }
