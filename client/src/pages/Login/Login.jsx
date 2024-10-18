@@ -22,40 +22,32 @@ const Login = () => {
         setEmail(e.target.value);
     };
 
-    const showLogin = () => setView('login');
     const showRegister = () => setView('register');
+    const showLogin = () => setView(''); // This switches back to the login view
 
     return (
         <div className={styles.LoginBox}>
             {view === '' && (
                 <div>
                     <h2>Login / SignUp form</h2>
-                    <div className={styles.ButtonContainer}>
-                        <button onClick={showLogin} className={styles.Button}>Login</button>
+                    <div className={styles.FormContainer}>
+                        <input
+                            type="text"
+                            value={username}
+                            onChange={handleUsernameChange}
+                            placeholder="Username"
+                            className={styles.Input}
+                        />
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={handlePasswordChange}
+                            placeholder="Password"
+                            className={styles.Input}
+                        />
+                        <button onClick={() => navigate('/')} className={styles.Button}>Login</button>
                         <button onClick={showRegister} className={styles.Button}>Register</button>
                     </div>
-                </div>
-            )}
-
-            
-            {view === 'login' && (
-                <div className={styles.FormContainer}>
-                    <h2>Login</h2>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={handleUsernameChange}
-                        placeholder="Username"
-                        className={styles.Input}
-                    />
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                        placeholder="Password"
-                        className={styles.Input}
-                    />
-                    <button onClick={() => navigate('/')} className={styles.Button}>Submit</button>
                 </div>
             )}
 
@@ -83,7 +75,7 @@ const Login = () => {
                         placeholder="Password"
                         className={styles.Input}
                     />
-                    <button onClick = {showLogin} className={styles.Button}>Submit</button>
+                    <button onClick={showLogin} className={styles.Button}>Submit</button> {/* Corrected function call */}
                 </div>
             )}
 
@@ -92,3 +84,4 @@ const Login = () => {
 };
 
 export default Login;
+
