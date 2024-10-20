@@ -46,6 +46,7 @@ const Login = () => {
                             className={styles.Input}
                         />
                         <button onClick={() => navigate('/')} className={styles.Button}>Login</button>
+                        <t>-------- or Sign Up--------</t>
                         <button onClick={showRegister} className={styles.Button}>Register</button>
                     </div>
                 </div>
