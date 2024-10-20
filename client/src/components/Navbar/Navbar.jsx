@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./Navbar.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // SVGs
 import hamburger from "../../assets/svg/Hamburger_LG.svg";
@@ -14,10 +14,18 @@ import { ReactSVG } from "react-svg";
 
 const Navbar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const navigate = useNavigate();
 
   const toggleBar = () => {
     setIsExpanded(!isExpanded);
   };
+
+  //fix this later
+  const handleCreateNew = (e) =>{
+    e.preventDefault();
+    navigate("/", {replace:true});
+    navigate(0);
+  }
 
   return (
     <div
@@ -40,7 +48,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/" className={styles.menuLink}>
+            <Link onClick={handleCreateNew} className={styles.menuLink}>
               <ReactSVG src={create} />
               {isExpanded && <span>Create New</span>}
             </Link>
