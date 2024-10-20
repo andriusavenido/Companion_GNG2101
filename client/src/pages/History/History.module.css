@@ -29,7 +29,7 @@
 
 .blockContainer {
     padding: 20px;
-    background-color: #4d4d4d; 
+    background-color: var(--dark-deep); 
     border-radius: 8px;
     margin-bottom: 15px;
 }

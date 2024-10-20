@@ -3,7 +3,7 @@
     flex-direction: column;
     margin: 0 100px;
     height: 100vh;
-    padding-top: 8rem;
+    padding-top: 4rem;
 }
 
 .introduction{
@@ -64,12 +64,6 @@
     height: 100%;
 }
 
-.messages{
-    flex-grow: 1;
-    overflow-y: auto;
-    width: 1;
-    width: 1000px;
-}
 
 .deleteButton{
     width: 10rem;
@@ -88,4 +82,45 @@
     background-color: var(--lighter-dark);
 }
 
+/*Message Styles*/
+.messages{
+    flex-grow: 1;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 10px;
+    overflow-y: auto;
+    width: 1;
+    width: 1000px;
 
+    /* Hide scrollbar for Chrome, Safari, and Edge */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.messages::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Edge */
+  }
+.message{
+    padding: 0.7rem;
+    max-width: 80%;
+    min-width: 10%;
+    border-radius: 15px;
+    word-wrap: break-word; /* Ensures long text wraps */
+}
+
+.bot{
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+    background-color: var(--rutgers-red);
+}
+.user{
+    background-color: var(--dark-deep);
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+}
+
+.loading{
+    background-color: var(--dark-deep);
+}

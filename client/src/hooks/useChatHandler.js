@@ -6,11 +6,10 @@ import { useState } from "react";
  * @returns  messages (list), input(string text), setInput(function), sendMessage(function), handleFileUpload(function), uploadedFile(file)
  */
 const useChatHandler = () =>{
-    const [messages, setMessages] = useState([
-        {id: 1, sender: 'bot', text: 'Hello World'},
-    ]);
+    const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const [uploadedFile, setUploadedFile] = useState(null);
+    const [reponseIsLoading, setResponseIsLoading] =useState(false);
   
 
     //add message to state
@@ -21,9 +20,19 @@ const useChatHandler = () =>{
         ]);
     };
 
-    //send message for bot response
+    //send message for bot response; TODO api call etc
     const sendMessage = () =>{
+        if (input.trim() === '') return;
 
+        addMessage('user', input);
+
+        //for prototype 1:
+        setResponseIsLoading(true);
+        setTimeout(()=>{
+            const botResponse = `Bot Response! You said: ${input}`;
+            addMessage('bot', botResponse);
+            setResponseIsLoading(false);
+        },700);
     };
 
     const handleFileUpload = (file) =>{
@@ -41,10 +50,9 @@ const useChatHandler = () =>{
 
     //file handler
 
-    //scroll to bottom
 
     return {
-        messages, input, setInput, sendMessage, handleFileUpload, uploadedFile
+        messages, input, setInput, sendMessage, handleFileUpload, uploadedFile, reponseIsLoading
     };
 
 }

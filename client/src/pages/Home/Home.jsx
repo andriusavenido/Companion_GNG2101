@@ -2,7 +2,7 @@ import { ReactSVG } from "react-svg";
 import companionLogo from "../../assets/svg/Rainbow.svg";
 import uploadIcon from "../../assets/svg/File_Add.svg";
 import styles from "./Home.module.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useChatHandler from "../../hooks/useChatHandler";
 
 const Home = () => {
@@ -14,6 +14,7 @@ const Home = () => {
     sendMessage,
     handleFileUpload,
     uploadedFile,
+    reponseIsLoading
   } = useChatHandler();
 
   const messagesEndRef = useRef(null); //reference used to snap to for scrolling
@@ -25,9 +26,17 @@ const Home = () => {
       e.preventDefault();
       setBeganConversation(true);
       //send message
+      sendMessage();
       setInput(""); // clear input after sending
     }
   };
+
+  useEffect(()=>{
+    console.log(messages);
+    if (messagesEndRef.current){
+      messagesEndRef.current.scrollIntoView({behaviour:"smooth"});
+    }
+  },[messages])
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -91,8 +100,15 @@ const Home = () => {
       )}
 
       {beganConversation && <div className={styles.messages}>
-        
-        
+        {messages.map((message) =>(
+          <div key = {message.id} className={`${styles.message} ${message.sender ==='user' ? styles.user: styles.bot}`}>
+            {message.text}
+          </div>
+        ))}
+        {reponseIsLoading && <div className={`${styles.message} ${styles.bot} ${styles.loading}`}>
+            loading...
+          </div>}
+        <div ref={messagesEndRef}></div>
         </div>}
 
       <div className={styles.inputBar}>
