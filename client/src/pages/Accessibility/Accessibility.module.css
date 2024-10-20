@@ -1,0 +1,38 @@
+
+.h1 {
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif;
+    color: rgb(255, 255, 255); /* Change text color */
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.guideline{
+border: wpx solid #000000;
+border-radius: 10px;
+padding: 10px;
+margin: 10px;
+text-align: center;
+transition: transform 0.3s, background-color 0.3s; /* Animation on hover */
+
+}
+
+.guideline:hover{
+    transform: scale(1.05);
+    background-color: #c2c0c0;
+}
+.Accessibility{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.a{
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit color from parent */
+}

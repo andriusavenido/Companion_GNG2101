@@ -1,0 +1,44 @@
+/* Dropdown.module.css */
+.dropdown {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    overflow: hidden;}
+
+.dropdownTitle {
+    cursor: pointer;
+    background-color: #b4b3b3; /* Slightly lighter than the background */
+    padding: 10px;
+    border: none;
+    border-radius: 10px; 
+    width: 100%; 
+    text-align: center; 
+    transition: backround-color 0.3s ease-out, color 0.3s ease-out;
+}
+.dropdownTitle:hover {
+    background-color: #f4efef;
+    color:black
+}
+
+.dropdownContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    padding: 0 10px; /* Initial padding to match the expanded state */
+    border: 1px solid #000000;
+    width: 100%; /* Make the content take the full width of the container */
+    background-color: #585656
+
+}
+
+.open {
+    max-height: 300px; /* Adjust this value based on your content */
+    padding: 10px;
+    border: none;
+}
