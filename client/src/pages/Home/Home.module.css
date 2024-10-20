@@ -4,11 +4,28 @@
     margin: 0 100px;
     height: 100vh;
     padding-top: 4rem;
+    overflow: hidden;
+    
 }
 
 .introduction{
     margin: 0;
     flex: 1;
+    width: 60em;
+}
+
+.logoText{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logoIcon {
+    width: 20px; 
+    height: 20px; 
+    margin-right: 10px; 
+    vertical-align: middle;  
+    transform: rotate(270deg); 
 }
 
 .page h1{
@@ -30,7 +47,8 @@
    display: flex;
    margin-top: 2rem;
    gap: 1rem;
-   margin-bottom: 2rem;
+   margin-bottom: 1rem;
+   align-self: f;
 }
 
 .textInput{
@@ -85,14 +103,14 @@
 /*Message Styles*/
 .messages{
     flex-grow: 1;
-    max-height: 80vh;
+    max-height: 70vh;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     padding: 10px;
     overflow-y: auto;
-    width: 1;
-    width: 1000px;
+    width: 60em;
+
 
     /* Hide scrollbar for Chrome, Safari, and Edge */
   scrollbar-width: none; /* Firefox */
@@ -123,4 +141,5 @@
 
 .loading{
     background-color: var(--dark-deep);
+    font-weight: 100;
 }

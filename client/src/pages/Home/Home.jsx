@@ -69,9 +69,12 @@ const Home = () => {
     <div className={styles.page}>
       {!beganConversation && (
         <div className={styles.introduction}>
+          <div className={styles.logoText}>
+            <ReactSVG  className={styles.logoIcon} src={companionLogo}/>
           <h1>
             Companion <span>a tool for Ally</span>
           </h1>
+          </div>
           <p>
             Hi there! I'm Companion, your virtual assistant here to help you
             enhance your course content's accessibility. How can I help?
