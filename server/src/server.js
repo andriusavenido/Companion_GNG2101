@@ -48,3 +48,18 @@ app.use((req, res, next) => {
  * @function
  * @param {number} PORT - The port number on which the server listens.
  */
+
+const PORT = process.env.PORT || 3000;
+
+mongoose.connect(database_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log('Connected to MongoDB');
+
+        // Start the Express server only if the database connection is successful
+        app.listen(PORT, () => {
+            console.log(`Server is running on http://localhost:${PORT}`);
+        });
+    })
+    .catch(err => {
+        console.error('Error connecting to MongoDB:', err);
+    });
