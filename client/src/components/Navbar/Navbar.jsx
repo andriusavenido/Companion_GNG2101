@@ -23,8 +23,7 @@ const Navbar = () => {
   //fix this later
   const handleCreateNew = (e) =>{
     e.preventDefault();
-    navigate("/", {replace:true});
-    navigate(0);
+    navigate("/");
   }
 
   return (

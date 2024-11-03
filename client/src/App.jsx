@@ -10,7 +10,7 @@ import Login from './pages/Login/Login';
 function App() {
 
   return (
-    <Router>
+    <Router basename ="/Companion_GNG2101">
        <div className="topWrapper">
        <Navbar></Navbar>
        <div className="pages">

@@ -5,7 +5,7 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  color-scheme: dark;
   color: #FFFFFF;
   background-color: #1F1F1F;
 
@@ -37,4 +37,5 @@ body{
 
 *{
   font-family: var(--main-font);
+  color:#FFFFFF;
 }

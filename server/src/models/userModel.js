@@ -46,7 +46,16 @@ userSchema.statics.signup = async function (email, username, password){
     }
 
     // add salt and hash password for encryption to database
+    const salt = await bcrypt.genSalt(12);
+    const hash = await bcrypt.hash(password, salt);
+
+    //add to db
+    const user = await this.create({email, username, password: hash});
+
+    return user;
 
 }
+
+//adding login
 
 module.exports = mongoose.model('User', userSchema);
