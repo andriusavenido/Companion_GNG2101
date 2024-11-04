@@ -1,4 +1,8 @@
 import { readFile } from 'fs';
+/**
+ * 
+ * @param {*} filePath 
+ */
 
 function csvToJson(filePath) {
     readFile(filePath, 'utf8', (err, data) => {
@@ -23,4 +27,4 @@ function csvToJson(filePath) {
     });
 }
 
-
+module.exports = {csvToJson};

@@ -24,6 +24,11 @@ const database_URI = process.env.database_URI;
 app.use(express.json());
 
 /**
+ * Import routes
+ */
+const userRoutes = require('./routes/users');
+
+/**
  * Logs the request path and method to the console for each incoming request.
  * @function
  * @param {Object} req - The request object.
@@ -41,6 +46,7 @@ app.use((req, res, next) => {
 /**
  * Main Route Handlers
  */
+app.use('/api/user',userRoutes);
 
 
 /**
