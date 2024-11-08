@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-//grab service
+//grab services
 const {getOpenAIResponse} = require('../services/openaiService');
+const {csvToJson} = require('../services/csvService');
+
+//file handler??
 
 router.post('/openAI-response', async (req, res) => {
     // const {message, rules } = req.body;

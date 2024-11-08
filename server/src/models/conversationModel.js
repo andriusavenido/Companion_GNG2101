@@ -26,7 +26,7 @@ const messageSchema = new Schema({
  * @property {Date} timestamp - The timestamp of the conversation
  */
 const conversationSchema = new Schema ({
-    userId:{
+    user_id:{
         type: Schema.Types.ObjectId,
         ref: 'User',
         required:'true',

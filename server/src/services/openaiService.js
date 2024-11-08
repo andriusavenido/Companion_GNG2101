@@ -11,7 +11,7 @@ const openai = new OpenAIApi(new Configuration({
  * 
  * TODO: we want to add more things when creating prompt, like rules and regulations etc...
  */
-const generateCompanionPrompt = (jsonData)=>{
+const generateCompanionPrompt = (message, jsonData)=>{
 
 };
 

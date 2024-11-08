@@ -27,16 +27,12 @@ app.use(express.json());
  * Import routes
  */
 const userRoutes = require('./routes/users');
+const conversationRoutes = require('./routes/conversations');
+const openaiRoutes = require('./routes/openai');
+
 
 /**
  * Logs the request path and method to the console for each incoming request.
- * @function
- * @param {Object} req - The request object.
- * @param {string} req.path - The path of the incoming request.
- * @param {string} req.method - The HTTP method of the incoming request.
- * @param {Object} res - The response object.
- * @param {function} next - The next middleware function in the stack.
- * @returns {void} Passes control to the next middleware function.
  */
 app.use((req, res, next) => {
     console.log(req.path, req.method);
@@ -47,6 +43,8 @@ app.use((req, res, next) => {
  * Main Route Handlers
  */
 app.use('/api/user',userRoutes);
+app.use('/api/conversatoin',conversationRoutes);
+app.use('/api/openai',openaiRoutes);
 
 
 /**
