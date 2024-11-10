@@ -10,8 +10,8 @@ const {csvToJson} = require('../services/csvService');
 const storage = multer.memoryStorage();
 const upload = multer({storage:storage});
 
-router.post('/companion-response', upload.single('file'), async (req, res) => {
-  const file = req.file;
+router.post('/companion-response', async (req, res) => {
+  
     // const {message, rules } = req.body;
     // const json from parser
   

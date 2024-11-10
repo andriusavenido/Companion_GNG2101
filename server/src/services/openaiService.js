@@ -1,9 +1,9 @@
 const {Configuration, OpenAIApi} = require('openai');
 
 //configure key
-const openai = new OpenAIApi(new Configuration({
-    apiKey: process.env.OPENAIKEY
-}));
+// const openai = new OpenAIApi(new Configuration({
+//     apiKey: process.env.OPENAIKEY
+// }));
 
 /**
  * Create custom prompt with all of our parameters

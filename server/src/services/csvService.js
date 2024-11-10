@@ -1,4 +1,4 @@
-import { readFile } from 'fs';
+const {readFile} = require('fs');
 /**
  * 
  * @param {*} filePath 

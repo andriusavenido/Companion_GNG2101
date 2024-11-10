@@ -53,9 +53,9 @@ app.use('/api/openai',openaiRoutes);
  * @param {number} PORT - The port number on which the server listens.
  */
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
-mongoose.connect(database_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(database_URI)
     .then(() => {
         console.log('Connected to MongoDB');
 
