@@ -1,9 +1,10 @@
-const {Configuration, OpenAIApi} = require('openai');
+const { OpenAI } = require('openai');
 
-//configure key
-// const openai = new OpenAIApi(new Configuration({
-//     apiKey: process.env.OPENAIKEY
-// }));
+// Initialize OpenAI with the API key
+const openai = new OpenAI({
+    apiKey: process.env.OPENAIKEY,
+});
+
 
 /**
  * Create custom prompt with all of our parameters
@@ -11,19 +12,47 @@ const {Configuration, OpenAIApi} = require('openai');
  * 
  * TODO: we want to add more things when creating prompt, like rules and regulations etc...
  */
-const generateCompanionPrompt = (message, jsonData)=>{
 
+//Wasnt to sure of format, so change if neccessary
+const generateCompanionPrompt = (message, csvData) => {
+    const csvText = JSON.stringify(csvData, null, 2);  
+    return `
+    Here is a set of data in JSON format: 
+    ${csvText}
+
+    Please respond to the following message with the best possible answer:
+    ${message}
+    `;
 };
+
 
 /**
- * Send request and receive response from openai api services
- * @param {String} message 
- * @param {JSON} csvJSON 
+ * Send request and receive response from OpenAI API
+ * @param {String} message The user message
+ * @param {Object} csvJSON Parsed CSV data in JSON format
+ * @returns {String} The response text from OpenAI
  */
-const getOpenAIResponse = async (message, csvJSON) =>{
-    const prompt = generateCompanionPrompt(message,csvJSON);
+const getOpenAIResponse = async (message, csvJSON) => {
+    try {
+        // Generate the companion prompt with the provided message and CSV data
+        const prompt = generateCompanionPrompt(message, csvJSON);  
 
+        // Use the chat completions API in OpenAI
+        const response = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo', // You can change this to gpt-4 if necessary
+            messages: [
+                { role: 'system', content: 'You are an assistant that analyzes data.' },
+                { role: 'user', content: prompt },
+            ],
+            max_tokens: 150, // Adjust token limit as necessary
+            temperature: 0.4,  
+        });
 
+        return response.choices[0].message.content; // Access the message content from the response
+    } catch (error) {
+        console.error('Error with OpenAI API:', error);
+        throw new Error('Failed to get OpenAI response');
+    }
 };
 
-module.exports = {getOpenAIResponse};
+module.exports = { getOpenAIResponse };

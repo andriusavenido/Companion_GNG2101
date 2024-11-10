@@ -1,30 +1,31 @@
-const {readFile} = require('fs');
+const { parse } = require('csv-parse');
+
 /**
- * 
- * @param {*} filePath 
+ * Convert CSV data (file buffer) to JSON format
+ * @param {Buffer} buffer The CSV file data in memory (from multer)
+ * @returns {Promise<Object[]>} The parsed JSON array from the CSV data
  */
-
-function csvToJson(filePath) {
-    readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error reading the file:', err);
-            return;
-        }
-
-        const rows = data.trim().split('\n');
-        const headers = rows[0].split(',');
-
-        const jsonArray = rows.slice(1).map(row => {
-            const values = row.split(',');
-            const jsonObject = {};
-            headers.forEach((header, index) => {
-                jsonObject[header.trim()] = values[index].trim();
-            });
-            return jsonObject;
+function csvToJson(buffer) {
+    return new Promise((resolve, reject) => {
+        const results = [];
+        const parser = parse(buffer, {
+            columns: true, // Use the first line as column names
+            skip_empty_lines: true
         });
-        
-        return jsonArray;
+
+        parser.on('data', (row) => {
+            results.push(row); // Collect each row of data
+        });
+
+        parser.on('end', () => {
+            resolve(results); // Return the parsed JSON
+        });
+
+        parser.on('error', (error) => {
+            reject(error); // Handle any parsing errors
+        });
     });
 }
 
-module.exports = {csvToJson};
+module.exports = { csvToJson };
+
