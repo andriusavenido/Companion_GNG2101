@@ -1,13 +1,17 @@
 const express = require('express');
+const multer = require('multer');
 const router = express.Router();
 
 //grab services
 const {getOpenAIResponse} = require('../services/openaiService');
 const {csvToJson} = require('../services/csvService');
 
-//file handler??
+//set up multer to store files in memory
+const storage = multer.memoryStorage();
+const upload = multer({storage:storage});
 
-router.post('/openAI-response', async (req, res) => {
+router.post('/companion-response', upload.single('file'), async (req, res) => {
+  const file = req.file;
     // const {message, rules } = req.body;
     // const json from parser
   

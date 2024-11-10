@@ -15,14 +15,13 @@ const generateCompanionPrompt = (message, jsonData)=>{
 
 };
 
-
 /**
  * Send request and receive response from openai api services
  * @param {String} message 
  * @param {JSON} csvJSON 
  */
 const getOpenAIResponse = async (message, csvJSON) =>{
-    const prompt = generateCompanionPrompt(csvJSON);
+    const prompt = generateCompanionPrompt(message,csvJSON);
 
 
 };

@@ -22,7 +22,8 @@ const Home = () => {
 
   //enter key
   const handleKeyDown = (e) => {
-    if (e.key === "Enter" && input.trim()) {
+    //CANNOT enter if its loading
+    if (e.key === "Enter" && input.trim() && !responseIsLoading) {
       e.preventDefault();
       setBeganConversation(true);
       //send message
