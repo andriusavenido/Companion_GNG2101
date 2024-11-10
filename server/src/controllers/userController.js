@@ -10,18 +10,24 @@ const user_login = async (req, res) =>{
     const {email, password} = req.body;
 
     try{
-        const user = User.login(email, password);
+        const user = await User.login(email, password);
 
-        //create token using id
-        const token = createToken(user._id);
-        const username = user.username;
+        if (user){
+            const token = createToken(user._id);
+            const username = user.username;
+    
+            //return details as response
+            res.status(200).json({email, username, token});
+        }
 
-        //return details as response
-        res.status(200).json({email, username, token});
-        
+        else{
+            res.status(400).json({msg:"User not found"});
+        }
+    
+
     }catch(err){
         //error message
-        res.status(200).json({error:err.message});
+        res.status(400).json({error:err.message});
     }
 }
 
@@ -39,7 +45,7 @@ const user_signup = async (req, res)=>{
         res.status(200).json({email, username, token});
         
     }catch(err){
-        res.status(400).json({error: error.message});
+        res.status(400).json({error: err.message});
     }
 
 }

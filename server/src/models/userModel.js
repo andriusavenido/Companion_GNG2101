@@ -57,10 +57,10 @@ userSchema.statics.signup = async function (email, username, password){
 }
 
 //adding login
-userSchema.statics.login = async function(email, password){
+userSchema.statics.login = async function(email,password){
 
     //validate fields
-    if (!email || !password || !username){
+    if (!email || !password){
         throw Error('All fields must be filled.');
     }
     if(!validator.isEmail(email)){

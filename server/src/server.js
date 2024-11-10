@@ -43,7 +43,7 @@ app.use((req, res, next) => {
  * Main Route Handlers
  */
 app.use('/api/user',userRoutes);
-app.use('/api/conversatoin',conversationRoutes);
+app.use('/api/conversation',conversationRoutes);
 app.use('/api/openai',openaiRoutes);
 
 
