@@ -39,12 +39,12 @@ const getOpenAIResponse = async (message, csvJSON) => {
 
         // Use the chat completions API in OpenAI
         const response = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo', // You can change this to gpt-4 if necessary
+            model: 'gpt-4o', // You can change this to gpt-4 if necessary
             messages: [
                 { role: 'system', content: 'You are an assistant that analyzes data.' },
                 { role: 'user', content: prompt },
             ],
-            max_tokens: 150, // Adjust token limit as necessary
+            max_tokens: 1000, // Adjust token limit as necessary
             temperature: 0.4,  
         });
 
