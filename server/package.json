@@ -4,13 +4,14 @@
   "description": "backend for companion",
   "main": "src/server.js",
   "scripts": {
-    "start":"node src/server.js",
+    "start": "node src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "avenido",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "csv-parse": "^5.5.6",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
