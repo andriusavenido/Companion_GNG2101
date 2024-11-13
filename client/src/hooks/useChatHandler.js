@@ -9,7 +9,7 @@ const useChatHandler = () =>{
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const [uploadedFile, setUploadedFile] = useState(null);
-    const [reponseIsLoading, setResponseIsLoading] =useState(false);
+    const [responseIsLoading, setResponseIsLoading] =useState(false);
   
 
     //add message to state
@@ -21,18 +21,29 @@ const useChatHandler = () =>{
     };
 
     //send message for bot response; TODO api call etc
-    const sendMessage = () =>{
+    const sendMessage = async () =>{
         if (input.trim() === '') return;
 
         addMessage('user', input);
 
-        //for prototype 1:
+        const formData = new FormData();
+        formData.append('file', uploadedFile);
+        formData.append('message', input);
+
         setResponseIsLoading(true);
-        setTimeout(()=>{
-            const botResponse = `Bot Response! You said: ${input}`;
-            addMessage('bot', botResponse);
+        try {
+            const response = await fetch("/api/openai/companion-response", {method: 'POST', body: formData,});
+            if (!response.ok) {
+              throw new Error(`Response status: ${response.status}`);
+            }
+        
+            const json = await response.json();
+            addMessage('bot', json.openaiResponse);
+
             setResponseIsLoading(false);
-},700);        
+          } catch (error) {
+            console.error(error.message);
+          }   
     };
 
     const handleFileUpload = (file) =>{
@@ -52,7 +63,7 @@ const useChatHandler = () =>{
 
 
     return {
-        messages, input, setInput, sendMessage, handleFileUpload, uploadedFile, reponseIsLoading
+        messages, input, setInput, sendMessage, handleFileUpload, uploadedFile, responseIsLoading
     };
 
 }

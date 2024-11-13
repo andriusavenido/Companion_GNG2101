@@ -14,7 +14,7 @@ const Home = () => {
     sendMessage,
     handleFileUpload,
     uploadedFile,
-    reponseIsLoading
+    responseIsLoading
   } = useChatHandler();
 
   const messagesEndRef = useRef(null); //reference used to snap to for scrolling
@@ -109,7 +109,7 @@ const Home = () => {
             {message.text}
           </div>
         ))}
-        {reponseIsLoading && <div className={`${styles.message} ${styles.bot} ${styles.loading}`}>
+        {responseIsLoading && <div className={`${styles.message} ${styles.bot} ${styles.loading}`}>
             loading...
           </div>}
         <div ref={messagesEndRef}></div>
