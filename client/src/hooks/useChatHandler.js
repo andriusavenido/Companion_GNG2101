@@ -32,7 +32,7 @@ const useChatHandler = () =>{
             const botResponse = `Bot Response! You said: ${input}`;
             addMessage('bot', botResponse);
             setResponseIsLoading(false);
-        },700);
+},700);        
     };
 
     const handleFileUpload = (file) =>{
