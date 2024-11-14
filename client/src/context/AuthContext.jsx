@@ -24,7 +24,7 @@ export const AuthContextProvider = ({children}) =>{
     useEffect(() =>{
         const userLocal = JSON.parse(localStorage.getItem("user"));
 
-        //check if token expired
+        //check if token expired by api call
 
         const logoutUser = () => {
             localStorage.removeItem("user");

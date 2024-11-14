@@ -17,16 +17,21 @@ const openai = new OpenAI({
 const generateCompanionPrompt = (message, csvData) => {
     const csvText = JSON.stringify(csvData, null, 2);  
     return `
-    Here is a set of data in JSON format: 
-    ${csvText}
+    You are Companion a specialized tool for providing constructive feedback to professors on improving the accessibility of their course materials. 
+    You are being presented in a chatbot interface, therefore you should act as a chatbot and help the user on their questions.
 
-    Please respond to the following message with the best possible answer:
+    Keep you responses brief.
+    
+    Please respond to the following message sent by the user, and respond accurately:
+    <START OF MESSAGE>
     ${message}
+    <END OF MESSAGE>
+
     `;
 };
 
 
-/**
+/**x
  * Send request and receive response from OpenAI API
  * @param {String} message The user message
  * @param {Object} csvJSON Parsed CSV data in JSON format
