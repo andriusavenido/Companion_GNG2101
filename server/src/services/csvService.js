@@ -14,7 +14,17 @@ function csvToJson(buffer) {
         });
 
         parser.on('data', (row) => {
-            results.push(row); // Collect each row of data
+            // Filter error columns with value '1'
+            const errors = Object.keys(row).filter(key => row[key] === '1' && key !== 'ID' && key !== 'File/Image Name' && key !== 'File Type' && key !== 'Score' && key !== 'Deleted' && key !== 'Library Reference' && key !== 'URL' && key !== 'Date Accessed');
+            if (errors.length > 0) {
+                results.push({
+                    Name: row['File/Image Name'],
+                    FileType: row['File Type'],
+                    Id: row['ID'],
+                    Url: row['URL'],
+                    Errors: errors
+                });
+            }
         });
 
         parser.on('end', () => {
@@ -24,8 +34,10 @@ function csvToJson(buffer) {
         parser.on('error', (error) => {
             reject(error); // Handle any parsing errors
         });
+
+        parser.write(buffer);
+        parser.end();
     });
 }
 
 module.exports = { csvToJson };
-
