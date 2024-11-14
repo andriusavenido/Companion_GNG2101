@@ -14,15 +14,13 @@ const upload = multer({ storage: storage });
 router.post('/companion-response', upload.single('file'), async (req, res) => {
     const file = req.file;
 
-    if (!file) {
-        return res.status(400).json({ error: 'No file uploaded' });
-    }
-
     try {
+        let csvJSON = null;
+        if (file){
+            csvJSON = await csvToJson(file.buffer);
+        }
         
-        const csvJSON = await csvToJson(file.buffer);
-        
-        const { message, rules } = req.body; 
+        const { message} = req.body; 
         
         // Send the parsed CSV JSON and message to OpenAI service
         const openaiResponse = await getOpenAIResponse(message, csvJSON);

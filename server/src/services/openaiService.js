@@ -13,22 +13,49 @@ const openai = new OpenAI({
  * TODO: we want to add more things when creating prompt, like rules and regulations etc...
  */
 
-//Wasnt to sure of format, so change if neccessary
-const generateCompanionPrompt = (message, csvData) => {
-    const csvText = JSON.stringify(csvData, null, 2);  
+//TODO: prompt is not finished -> more testing required
+//TODO: ADDING CHAT HISTORY from front end
+const generateCompanionPromptWithCSV = (message, csvData) => {
+    const csvText = JSON.stringify(csvData, null, 1);  
     return `
     You are Companion a specialized tool for providing constructive feedback to professors on improving the accessibility of their course materials. 
     You are being presented in a chatbot interface, therefore you should act as a chatbot and help the user on their questions.
 
-    Keep you responses brief.
-    
+    Below CSV file parsed to JSON that was given to the professor using another
+    accessibility tool Ally which scored their course content. Analyze this file to keep in mind when 
+    answering the questions of the professor.
+
+    <CSV FILE>
+    ${csvText}
+    <END OF CSV FILE>
+
+    Keep your responses brief. 
     Please respond to the following message sent by the user, and respond accurately:
     <START OF MESSAGE>
     ${message}
     <END OF MESSAGE>
 
+
     `;
 };
+
+const generateCompanionPrompt = (message) =>{
+    return `
+     You are Companion a specialized tool for providing constructive feedback to professors on improving the accessibility of their course materials. 
+    You are being presented in a chatbot interface, therefore you should act as a chatbot and help the user on their questions.
+
+    Their request is usually contains a csv file that contains feedback from their accesibility tool called Ally.
+    If they ask you to analyze a file, tell them that they haven't uploaded their Ally feedback file.
+
+    Rules:
+    - Keep your responses brief. 
+    - Only answer questions and topics pertaining to your role, do not go off topic and tell them if they ask.
+    Please respond to the following message sent by the user, and respond accurately:
+    <START OF MESSAGE>
+    ${message}
+    <END OF MESSAGE>
+    `;
+}
 
 
 /**x
@@ -40,7 +67,12 @@ const generateCompanionPrompt = (message, csvData) => {
 const getOpenAIResponse = async (message, csvJSON) => {
     try {
         // Generate the companion prompt with the provided message and CSV data
-        const prompt = generateCompanionPrompt(message, csvJSON);  
+        let prompt = null;
+        if (!csvJSON){
+            prompt=generateCompanionPrompt(message);
+        }else{
+            prompt= generateCompanionPromptWithCSV(message, csvJSON);
+        }
 
         // Use the chat completions API in OpenAI
         const response = await openai.chat.completions.create({
