@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Login.module.css';
 import { useNavigate } from 'react-router-dom';
+import { useLoginSignup } from '../../hooks/useLoginSignup';
 
+/**
+ * TODO: adding a error and loading state
+ * @returns 
+ */
 const Login = () => {
     const [view, setView] = useState(''); // Manage which form is shown
     const navigate = useNavigate();
+    const {login, signup, isLoading, error} = useLoginSignup();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -24,6 +30,30 @@ const Login = () => {
 
     const showRegister = () => setView('register');
     const showLogin = () => setView(''); // This switches back to the login view
+
+    const handleLogin = async (e)=>{
+        e.preventDefualt();
+        const loggedIn = await login(email,password);
+        if (loggedIn){
+            navigate('/');
+        }
+    }
+
+    const handleSignUp = async (e)=>{
+        e.preventDefault();
+        
+        const signedUp = await signup(email, username, password);
+ 
+        if (signedUp){
+         navigate('/');
+        }
+    }
+
+    //testing purposes
+    useEffect(()=>{
+        console.log(isLoading);
+        console.log(error);
+    },[isLoading,error]);
 
     return (
         <div className={styles.LoginBox}>
@@ -45,8 +75,8 @@ const Login = () => {
                             placeholder="Password"
                             className={styles.Input}
                         />
-                        <button onClick={() => navigate('/')} className={styles.Button}>Login</button>
-                        <t>-------- or Sign Up--------</t>
+                        <button onClick={handleLogin} className={styles.Button}>Login</button>
+                        <p>-------- or Sign Up--------</p>
                         <button onClick={showRegister} className={styles.Button}>Register</button>
                     </div>
                 </div>
@@ -76,7 +106,7 @@ const Login = () => {
                         placeholder="Password"
                         className={styles.Input}
                     />
-                    <button onClick={showLogin} className={styles.Button}>Submit</button> {/* Corrected function call */}
+                    <button onClick={handleSignUp} className={styles.Button}>Submit</button> {/* Corrected function call */}
                 </div>
             )}
 

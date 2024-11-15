@@ -11,10 +11,14 @@ import info from "../../assets/svg/Info.svg";
 import userIcon from "../../assets/svg/User_02.svg";
 import planet from "../../assets/svg/Planet.svg";
 import { ReactSVG } from "react-svg";
+import { useAuthContext } from "../../context/AuthContext";
+import { useLoginSignup } from "../../hooks/useLoginSignup";
 
 const Navbar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
+  const {user} = useAuthContext();
+  const {signout} = useLoginSignup();
 
   const toggleBar = () => {
     setIsExpanded(!isExpanded);
@@ -23,6 +27,11 @@ const Navbar = () => {
   //fix this later
   const handleCreateNew = (e) =>{
     e.preventDefault();
+    navigate("/");
+  }
+
+  const handleSignOut = ()=>{
+    signout();
     navigate("/");
   }
 
@@ -65,11 +74,15 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/login" className={styles.menuLink}>
+            <Link to={user?"":"/login"} className={styles.menuLink}>
               <ReactSVG src={userIcon} />
-              {isExpanded && <span>Login</span>}
+              {isExpanded && <span>{user?user.username:"Login"}</span>}
             </Link>
           </li>
+          {user &&isExpanded&&<li><Link onClick={handleSignOut} className={styles.menuLink}>
+              <span>Sign Out</span>
+            </Link>
+             </li>}
         </ul>
       </nav>
       <Link to="/about" className={`${styles.menuLink} ${styles.aboutLink}`}>

@@ -1,6 +1,6 @@
-import { useContext, useReducer, useState } from "react";
+import { createContext, useContext, useReducer, useEffect } from "react";
 
-const AuthContext = useContext();
+const AuthContext = createContext();
 
 //reducer to control what functions to do LOGIN AND LOGOUT -- SETTING USER GLOBAL STATE
 const authReducer = (state, action)=>{
@@ -22,9 +22,35 @@ export const AuthContextProvider = ({children}) =>{
 
    //on mount, try to do an auto login if their token is still valid
     useEffect(() =>{
-        const userLocal = JSON.parse(localStorage.getItem("user"));
+        const user = JSON.parse(localStorage.getItem("user"));
 
-        //check if token expired by api call
+        //check if token expired by check authentication api call
+        const authCheck = async () =>{
+            if (!user || !user.token){
+                logoutUser();
+                return;
+            }
+
+            try{
+                const response = await fetch('/api/user/auth-check',{
+                    headers:{
+                        Authorization: `Bearer ${user.token}`
+                    }
+                });
+
+                if (response.status===401){
+                    const data = await response.json();
+                    if (data.error === 'Expired Token'){    
+                        logoutUser();
+                    }else {
+                        console.error('Unauthorized request:', data.error);
+                    }
+                }
+
+            }catch(err){
+                console.log("Error during authentication check", err);
+            }
+        }
 
         const logoutUser = () => {
             localStorage.removeItem("user");
@@ -34,9 +60,9 @@ export const AuthContextProvider = ({children}) =>{
           //login if login route went through
           if (user) {
             dispatch({ type: "LOGIN", payload: user });
-            fetchCheck();
+            authCheck();
           }
-    });
+    },[]);
 
     return (
         <AuthContext.Provider value={{...state,dispatch}}>
@@ -46,6 +72,8 @@ export const AuthContextProvider = ({children}) =>{
 
 }
 
+//accessor hook
 export const useAuthContext = () =>{
+    return useContext(AuthContext);
 
 }

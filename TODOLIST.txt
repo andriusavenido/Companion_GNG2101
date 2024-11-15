@@ -1,0 +1,8 @@
+
+Frontend:
+- finishing user auth
+- adding user history
+- error checking
+
+Backend:
+-

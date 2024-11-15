@@ -6,8 +6,13 @@ import About from './pages/About/About';
 import Accessibility from './pages/Accessibility/Accessibility';
 import History from './pages/History/History';
 import Login from './pages/Login/Login';
+import RequireLogin from './pages/Redirects/RequireLogin';
+import { useAuthContext } from './context/AuthContext';
 
 function App() {
+  //protect routes using auth context
+  const {user} = useAuthContext();
+
 
   return (
     <Router basename ="/Companion_GNG2101">
@@ -17,7 +22,7 @@ function App() {
         <Routes>
           <Route path = "/" element = {<Home/>}></Route>
           <Route path = "/about" element = {<About/>}></Route>
-          <Route path = "/history" element = {<History/>}></Route>
+          <Route path = "/history" element = {user? <History/>:<RequireLogin/>}></Route>
           <Route path = "/accessibility" element = {<Accessibility/>}></Route>
           <Route path = "/login" element = {<Login/>}></Route>
         </Routes>
