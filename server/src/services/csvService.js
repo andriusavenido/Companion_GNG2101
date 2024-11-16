@@ -15,13 +15,13 @@ function csvToJson(buffer) {
 
         parser.on('data', (row) => {
             // Filter error columns with value '1'
-            const errors = Object.keys(row).filter(key => row[key] === '1' && key !== 'ID' && key !== 'File/Image Name' && key !== 'File Type' && key !== 'Score' && key !== 'Deleted' && key !== 'Library Reference' && key !== 'URL' && key !== 'Date Accessed');
+            const errors = Object.keys(row).filter(key => row[key] === '1' && key !== 'Id' && key !== 'Name' && key !== 'Mime type' && key !== 'Score' && key !== 'Deleted at' && key !== 'Library reference' && key !== 'Url' && key !== 'Checked on');
             if (errors.length > 0) {
                 results.push({
-                    Name: row['File/Image Name'],
-                    FileType: row['File Type'],
-                    Id: row['ID'],
-                    Url: row['URL'],
+                    Name: row['Name'],
+                    FileType: row['Mime type'],
+                    Id: row['Id'],
+                    Url: row['Url'],
                     Errors: errors
                 });
             }
