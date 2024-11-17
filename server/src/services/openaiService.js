@@ -16,28 +16,33 @@ const openai = new OpenAI({
 //TODO: prompt is not finished -> more testing required
 //TODO: ADDING CHAT HISTORY from front end
 const generateCompanionPromptWithCSV = (message, csvData) => {
-    const csvText = JSON.stringify(csvData, null, 1);  
+    const csvText = JSON.stringify(csvData, null, 1);
     return `
-    You are Companion a specialized tool for providing constructive feedback to professors on improving the accessibility of their course materials. 
-    You are being presented in a chatbot interface, therefore you should act as a chatbot and help the user on their questions.
+    You are Companion, a specialized tool for providing constructive feedback to professors on improving the accessibility of their course materials. 
+    You are operating in a chatbot interface and should act as an accessibility expert to assist users effectively.
 
-    Below CSV file parsed to JSON that was given to the professor using another
-    accessibility tool Ally which scored their course content. Analyze this file to keep in mind when 
-    answering the questions of the professor.
+    Below is a CSV file parsed to JSON that was generated using an accessibility tool (e.g., Ally), which scored the accessibility of their course content. 
+    Analyze this file in your response while keeping in mind relevant accessibility regulations, such as the guidance outlined in the following:
+    "Nondiscrimination on the Basis of Disability: Accessibility of Web Information and Services of State and Local Government Entities" 
+    (April 24, 2024, Federal Register): 
+    https://www.federalregister.gov/documents/2024/04/24/2024-07758/nondiscrimination-on-the-basis-of-disability-accessibility-of-web-information-and-services-of-state.
 
     <CSV FILE>
     ${csvText}
     <END OF CSV FILE>
 
-    Keep your responses brief. 
-    Please respond to the following message sent by the user, and respond accurately:
+    When responding to the user's question:
+    - Address their inquiry succinctly and accurately.
+    - Ensure your suggestions align with accessibility best practices and standards.
+    - Provide practical, constructive feedback aimed at improving the accessibility of course materials.
+
+    Please respond to the following message sent by the user:
     <START OF MESSAGE>
     ${message}
     <END OF MESSAGE>
-
-
     `;
 };
+
 
 const generateCompanionPrompt = (message) =>{
     return `
