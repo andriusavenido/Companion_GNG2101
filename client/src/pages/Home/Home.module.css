@@ -3,7 +3,6 @@
     flex-direction: column;
     margin: 0 100px;
     height: 100vh;
-    padding-top: 4rem;
     overflow: hidden;
     
 }
@@ -12,6 +11,7 @@
     margin: 0;
     flex: 1;
     width: 60em;
+    padding-top: 4rem;
 }
 
 .logoText{
@@ -42,6 +42,10 @@
     font-weight: 100;
     font-size:  24px;
 }
+.superspan{
+    font-weight: 100;
+    font-size:  14px;
+}
 
 .inputBar{
    display: flex;
@@ -53,7 +57,7 @@
 
 .textInput{
     flex: 1;
-    font-size: 16px;
+    font-size: 18px;
     padding: 1rem;
     border: none;
     background-color: var(--dark-deep);
@@ -126,15 +130,16 @@
     min-width: 10%;
     border-radius: 15px;
     word-wrap: break-word; /* Ensures long text wraps */
+    font-size: 16px;
 }
 
 .bot{
     align-self: flex-start;
     border-bottom-left-radius: 0;
-    background-color: var(--rutgers-red);
+    background-color: var(--dark-deep);
 }
 .user{
-    background-color: var(--dark-deep);
+    background-color: var(--rutgers-red);
     align-self: flex-end;
     border-bottom-right-radius: 0;
 }
@@ -142,4 +147,9 @@
 .loading{
     background-color: var(--dark-deep);
     font-weight: 100;
+}
+
+/** This is for**/
+.line_space{
+    padding:0.3em;
 }

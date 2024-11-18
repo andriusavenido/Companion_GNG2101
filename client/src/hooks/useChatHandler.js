@@ -20,6 +20,18 @@ const useChatHandler = () =>{
         ]);
     };
 
+    //update the latest message on response streams
+    const updateLastMessage = (addedText)=>{
+        setMessages((previousMessages)=>{
+            const updatedMessages = [...previousMessages];
+            updatedMessages[updatedMessages.length-1] ={
+                ...updatedMessages[updatedMessages.length-1],
+                text: addedText,
+            };
+            return updatedMessages;
+        });
+    };
+
     //send message for bot response; TODO api call etc
     const sendMessage = async () =>{
         if (input.trim() === '') return;
@@ -37,13 +49,31 @@ const useChatHandler = () =>{
               throw new Error(`Response status: ${response.status}`);
             }
         
-            const json = await response.json();
-            addMessage('bot', json.openaiResponse);
+            //add a new bot message before streaming
+            addMessage('bot', 'Let me think...');
 
-            setResponseIsLoading(false);
+            //specific stream handlers, we need to decode the stream bits (similar in java)
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let done = false;
+            let text='';
+
+            //stream the response and add to message as it progressively reads; take note of await to pause asynchronous read
+            while(!done){
+                const {value, done:readerDone}=await reader.read();
+                done = readerDone;
+                text += decoder.decode(value, {stream:true});
+
+                updateLastMessage(text);
+            }
+
           } catch (error) {
             console.error(error.message);
-          }   
+          } finally{
+            setResponseIsLoading(false);
+          }
+          
+          
     };
 
     const handleFileUpload = (file) =>{

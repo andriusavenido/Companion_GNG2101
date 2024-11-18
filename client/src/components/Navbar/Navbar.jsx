@@ -15,7 +15,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import { useLoginSignup } from "../../hooks/useLoginSignup";
 
 const Navbar = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
   const navigate = useNavigate();
   const {user} = useAuthContext();
   const {signout} = useLoginSignup();
@@ -28,6 +28,7 @@ const Navbar = () => {
   const handleCreateNew = (e) =>{
     e.preventDefault();
     navigate("/");
+    window.location.reload();
   }
 
   const handleSignOut = ()=>{
@@ -44,7 +45,7 @@ const Navbar = () => {
       <div className={styles.navHeader}>
         <button className={styles.hamBtn} onClick={toggleBar}>
           <ReactSVG src={hamburger} className={styles.icon} />
-          {isExpanded && <span>Rutgers Companion</span>}
+          {isExpanded && <span>Companion Accessibility Tool</span>}
         </button>
       </div>
       <nav className={styles.menu}>

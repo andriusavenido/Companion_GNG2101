@@ -33,7 +33,6 @@ const Home = () => {
   };
 
   useEffect(()=>{
-    console.log(messages);
     if (messagesEndRef.current){
       messagesEndRef.current.scrollIntoView({behaviour:"smooth"});
     }
@@ -102,16 +101,13 @@ const Home = () => {
           </p>
         </div>
       )}
-
+      {beganConversation &&  <h2>Companion v1.0<p className={styles.superspan}>powered by GPT-4o</p></h2>}
       {beganConversation && <div className={styles.messages}>
         {messages.map((message) =>(
           <div key = {message.id} className={`${styles.message} ${message.sender ==='user' ? styles.user: styles.bot}`}>
-            {message.text}
+            {parseMessageToJSX(message.text)}
           </div>
         ))}
-        {responseIsLoading && <div className={`${styles.message} ${styles.bot} ${styles.loading}`}>
-            loading...
-          </div>}
         <div ref={messagesEndRef}></div>
         </div>}
 
@@ -121,8 +117,9 @@ const Home = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Send a message..."
+          placeholder={responseIsLoading?"Companion is working hard!":"Send a message..."}
           onKeyDown={handleKeyDown}
+          disabled={responseIsLoading}
         />
         <div
           className={styles.fileDrop}
@@ -162,6 +159,53 @@ function truncateFilename(filename, maxLength) {
     return filename;
   }
   return `${filename.slice(0, maxLength - 3)}...`;
+}
+
+/**
+ * Custom Formatting function (to handle list reponses etc)
+ * @param {*} messageText 
+ * @returns 
+ */
+function parseMessageToJSX(messageText) {
+  const lines = messageText.split('\n');
+
+  return lines.map((line, index) => {
+    // Check if line has more than one space (add padding for extra whitespace)
+    if (line.trim().length === 0) {
+      return <div key={index} className={styles.line_space}/>;
+    }
+
+    // Render bold text (e.g., **bold**)
+    if (line.startsWith('**') && line.endsWith('**')) {
+      return <strong key={index}>{line.slice(2, -2)}</strong>;
+    }
+    
+    // Render italic text (e.g., *italic*)
+    if (line.startsWith('*') && line.endsWith('*')) {
+      return <em key={index}>{line.slice(1, -1)}</em>;
+    }
+
+    // Render bullet points (e.g., - bullet point)
+    if (line.startsWith('- ')) {
+      return <ul key={index}><li>     {line.slice(2)}</li></ul>;
+    }
+
+    // Replace bold (**bold**) and italic (*italic*) in the middle of text
+    const lineElements = [];
+    let parts = line.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g); // Split by bold/italic
+    parts.forEach((part, idx) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        lineElements.push(<strong key={idx}>{part.slice(2, -2)}</strong>);
+      } else if (part.startsWith('*') && part.endsWith('*')) {
+        lineElements.push(<em key={idx}>{part.slice(1, -1)}</em>);
+      } else {
+        lineElements.push(part);
+      }
+    });
+
+    // Return the parts as a single JSX element
+    return <p key={index}>{lineElements}</p>;
+  });
 }
 
 export default Home;

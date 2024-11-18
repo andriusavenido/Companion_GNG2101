@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/Companion_GNG2101/',
+  base: '/Companion_GNG2101',
   server:{
     port: 4000,
     proxy:{
