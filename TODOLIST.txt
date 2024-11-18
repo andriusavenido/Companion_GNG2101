@@ -1,8 +1,6 @@
-
-Frontend:
-- finishing user auth
-- adding user history
-- error checking
-
-Backend:
--
+Front End:
+- add more information to accesibility and about us pages
+- saving user conversation history
+    -> perhaps allowing the user to continue with their conversations 
+        -more complex due to front end state management
+        -saving it to db 
