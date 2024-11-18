@@ -69,7 +69,7 @@ const generateCompanionPrompt = () =>{
  * @param {Object} csvJSON Parsed CSV data in JSON format
  * @returns {String} The response text from OpenAI
  */
-const getOpenAIResponse = async (message, csvJSON,res) => {
+const getOpenAIResponse = async (messages, csvJSON, res) => {
     try {
         // Generate the companion prompt with the provided message and CSV data
         let prompt = null;
@@ -78,13 +78,12 @@ const getOpenAIResponse = async (message, csvJSON,res) => {
         }else{
             prompt= generateCompanionPromptWithCSV(csvJSON);
         }
-
         // Use the chat completions API in OpenAI
         const response = await openai.chat.completions.create({
             model: 'gpt-4o', // You can change this to gpt-4 if necessary
             messages: [
                 { role: 'system', content: prompt },
-                { role: 'user', content: message },
+               ...messages,
             ],
             max_tokens: 8192, // 8192 is recommended token limit (be careful with costs)
             temperature: 0.4,  

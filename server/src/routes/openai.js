@@ -19,12 +19,13 @@ router.post('/companion-response', upload.single('file'), async (req, res) => {
         if (file){
             csvJSON = await csvToJson(file.buffer);
         }
-        
-        const { message} = req.body; 
-        
+    
+        const parsedMessages = JSON.parse(req.body.message);//unstring the json messages array
+        const messages = convertMessagesToGPTRoles(parsedMessages);  //convert to gpt acceptable format
+
         // Send the parsed CSV JSON and message to OpenAI service and stream the response
         res.setHeader('Content-Type', 'application/json');
-        await getOpenAIResponse(message, csvJSON, res); //pas res object to directly stream to it
+        await getOpenAIResponse(messages, csvJSON,res); //pass res object to directly stream to it
 
         // // Send the OpenAI response back to the client
         // res.json({ openaiResponse });
@@ -35,5 +36,24 @@ router.post('/companion-response', upload.single('file'), async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+/**
+ * Reformats an array of objects from front end (message history), into defined roles for chatgpt
+ * 
+ * @param {*} messages 
+ * @returns array of objects
+ */
+function convertMessagesToGPTRoles(messages){
+    //grab the latest 6 messages
+    const latestMessages = messages.slice(-6);
+
+    return latestMessages.map(message=>{
+        const role = message.sender === 'user'?'user':'assistant';
+        return {
+            role:role,
+            content:message.text
+        }
+    })
+}
 
 module.exports = router;

@@ -36,14 +36,17 @@ const useChatHandler = () =>{
     const sendMessage = async () =>{
         if (input.trim() === '') return;
 
-        addMessage('user', input);
+        addMessage('user', input);//timing is asynchronous (can cause problems cause of react)
+
+        //thus we ensure state updates are complete when sending the current array
+        const currentMessages = [...messages, { sender: 'user', text: input }];
 
         const formData = new FormData();
         formData.append('file', uploadedFile);
-        formData.append('message', input);
+        formData.append('message', JSON.stringify(currentMessages));//change to json string
 
         setResponseIsLoading(true);
-        try {
+        try { //we send the file and message array so that the bot has history context
             const response = await fetch("/api/openai/companion-response", {method: 'POST', body: formData,});
             if (!response.ok) {
               throw new Error(`Response status: ${response.status}`);
