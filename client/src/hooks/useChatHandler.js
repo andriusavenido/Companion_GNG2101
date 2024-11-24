@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useHistoryContext } from "../context/HistoryContext";
 
 /**
  * Custom Hook to handle message and file state during conversations
@@ -10,6 +11,14 @@ const useChatHandler = () =>{
     const [input, setInput] = useState('');
     const [uploadedFile, setUploadedFile] = useState(null);
     const [responseIsLoading, setResponseIsLoading] =useState(false);
+
+    const {messageHistory, clearMessageHistory} = useHistoryContext();//
+
+    //on mount, set history context into messages
+    useEffect(()=>{
+        setMessages(messageHistory);
+        clearMessageHistory();//reset history context
+    },[]);
   
 
     //add message to state

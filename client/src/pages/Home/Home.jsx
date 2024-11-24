@@ -5,7 +5,7 @@ import styles from "./Home.module.css";
 import { useEffect, useRef, useState } from "react";
 import useChatHandler from "../../hooks/useChatHandler";
 
-const Home = () => {
+const Home = ({}) => {
   const [beganConversation, setBeganConversation] = useState(false);
   const {
     messages,

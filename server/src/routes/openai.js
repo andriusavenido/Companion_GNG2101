@@ -45,7 +45,7 @@ router.post('/companion-response', upload.single('file'), async (req, res) => {
  */
 function convertMessagesToGPTRoles(messages){
     //grab the latest 6 messages
-    const latestMessages = messages.slice(-6);
+    const latestMessages = messages.slice(-10);
 
     return latestMessages.map(message=>{
         const role = message.sender === 'user'?'user':'assistant';

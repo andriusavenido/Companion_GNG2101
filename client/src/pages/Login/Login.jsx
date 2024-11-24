@@ -32,7 +32,7 @@ const Login = () => {
     const showLogin = () => setView(''); // This switches back to the login view
 
     const handleLogin = async (e)=>{
-        e.preventDefualt();
+        e.preventDefault();
         const loggedIn = await login(email,password);
         if (loggedIn){
             navigate('/');
