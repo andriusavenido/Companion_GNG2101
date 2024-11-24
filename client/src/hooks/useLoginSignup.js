@@ -66,10 +66,15 @@ export const useLoginSignup = () => {
         return true;
     };
 
+    const resetState = () =>{
+        setError(null);
+        setIsLoading(false);
+    }
+
     const signout = () => {
         localStorage.removeItem('user');
         dispatch({ type: 'LOGOUT' });
     };
 
-    return { login, signup, signout, isLoading, error };
+    return { login, signup, signout, isLoading, error,resetState };
 };

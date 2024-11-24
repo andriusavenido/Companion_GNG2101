@@ -9,7 +9,7 @@ const Login = () => {
     const navigate = useNavigate();
     const { dispatch } = useAuthContext(); // Access context to dispatch login action
 
-    const {login, signup, isLoading, error} = useLoginSignup(); // This hook might still be useful for signup
+    const {login, signup, isLoading, error, resetState} = useLoginSignup(); // This hook might still be useful for signup
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -19,8 +19,13 @@ const Login = () => {
     const handlePasswordChange = (e) => setPassword(e.target.value);
     const handleEmailChange = (e) => setEmail(e.target.value);
 
-    const showRegister = () => setView('register');
-    const showLogin = () => setView(''); // This switches back to the login view
+    const showRegister = () => {
+        setView('register');
+        setUsername('');
+        setPassword('');
+        setEmail('');
+        resetState();
+    }
 
     // Handle Login
     const handleLogin = async (e) => {
@@ -30,21 +35,21 @@ const Login = () => {
             // Call the login function from your hook or directly fetch API
             const loggedIn = await login(email, password);
 
-            if (loggedIn) {
-                // Save user data and token to localStorage
-                const user = {
-                    email,
-                    username,
-                    token: loggedIn.token, // Assuming the loggedIn object contains a token
-                };
-                localStorage.setItem('user', JSON.stringify(user));
+            // if (loggedIn) {
+            //     // Save user data and token to localStorage
+            //     const user = {
+            //         email,
+            //         username,
+            //         token: loggedIn.token, // Assuming the loggedIn object contains a token
+            //     };
+            //     localStorage.setItem('user', JSON.stringify(user));
 
-                // Dispatch the LOGIN action to update the global state in AuthContext
-                dispatch({ type: 'LOGIN', payload: user });
+            //     // Dispatch the LOGIN action to update the global state in AuthContext
+            //     dispatch({ type: 'LOGIN', payload: user });
 
-                // Navigate to home/dashboard after login
-                navigate('/');
-            }
+            //     // Navigate to home/dashboard after login
+             if (loggedIn)navigate('/');
+            // }
         } catch (err) {
             console.error("Login failed:", err);
         }
@@ -57,21 +62,21 @@ const Login = () => {
         try {
             const signedUp = await signup(email, username, password);
 
-            if (signedUp) {
-                // Save user data and token to localStorage
-                const user = {
-                    email,
-                    username,
-                    token: signedUp.token, // Assuming the signedUp object contains a token
-                };
-                localStorage.setItem('user', JSON.stringify(user));
+            // if (signedUp) {
+            //     // Save user data and token to localStorage
+            //     const user = {
+            //         email,
+            //         username,
+            //         token: signedUp.token, // Assuming the signedUp object contains a token
+            //     };
+            //     localStorage.setItem('user', JSON.stringify(user));
 
-                // Dispatch the LOGIN action to update the global state in AuthContext
-                dispatch({ type: 'LOGIN', payload: user });
+            //     // Dispatch the LOGIN action to update the global state in AuthContext
+            //     dispatch({ type: 'LOGIN', payload: user });
 
-                // Navigate to home/dashboard after signup
-                navigate('/');
-            }
+            //     // Navigate to home/dashboard after signup
+            if(signedUp) navigate('/');
+            // }
         } catch (err) {
             console.error("Signup failed:", err);
         }
@@ -137,6 +142,13 @@ const Login = () => {
                     <button onClick={handleSignUp} className={styles.Button}>Submit</button>
                 </div>
             )}
+
+            {error && (
+                <div className={styles.error}>
+                    {error}
+                </div>
+            )}
+
         </div>
     );
 };
