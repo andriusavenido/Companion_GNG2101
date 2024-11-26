@@ -1,41 +1,61 @@
+const Conversation = require('../models/conversationModel');
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
+const getAllConversationsByUser = async (req, res) => {
+    const user_id = req.user._id;
 
-/**
- * Schema for storing individual messages in a conversation.
- * @property {string} sender - The sender of the message ('user' or 'bot').
- * @property {string} text - The content of the message.
- */
-const messageSchema = new Schema({
-    sender:{
-        type: String,
-        enum: ['user', 'bot'],
-        required: true,
-    },
-    text: {
-        type: String,
-        required: true,
+    try {
+        const conversations = await Conversation.find({ user_id }).limit(10);
+        res.status(200).json(conversations);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
-});
+}
 
-/**
- * Schema for storing a log of a user's conversation with ChatGPT.
- * @property {Schema.Types.ObjectId} userId - The ID of the user having the conversation.
- * @property {Message[]} messages - An array of message objects representing the conversation.
- * @property {Date} timestamp - The timestamp of the conversation
- */
-const conversationSchema = new Schema ({
-    user_id:{
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required:'true',
-    },
-    messages:[messageSchema],
-    timestamp: {
-        type: Date,
-        default: Date.now,
+const createConversation = async (req, res) => {
+    const { messages, timestamp } = req.body;
+    const user_id = req.user._id;
+
+    // Ensure messages array is not empty and contains valid message objects
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+        return res.status(400).json({ error: 'Messages array is required and cannot be empty' });
     }
-});
 
-module.exports = mongoose.model('Conversation',conversationSchema);
+    console.log('Creating conversation with data:', { user_id, messages, timestamp });
+
+    try {
+        const conversation = await Conversation.create({ user_id, messages, timestamp });
+        console.log('Conversation saved:', conversation);
+        res.status(200).json(conversation);
+    } catch (err) {
+        console.error('Error saving conversation:', err);
+        res.status(400).json({ error: err.message });
+    }
+}
+
+const deleteConversation = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'Invalid Query Id' });
+    }
+
+    try {
+        const conversation = await Conversation.findOneAndDelete({ _id: id });
+
+        if (!conversation) {
+            return res.status(400).json({ error: 'No Conversation Exists' });
+        }
+
+        res.status(200).json({
+            _id: conversation._id,
+            msg: "Deleted Successfully"
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
+
+module.exports = {
+    getAllConversationsByUser, createConversation, deleteConversation
+}

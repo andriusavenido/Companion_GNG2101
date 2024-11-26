@@ -1,64 +1,66 @@
 .pageContainer {
+    padding: 20px;
+    background-color: #2f2f2f;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    width: 750px;
+    align-items: center;
 }
 
 .header {
-    color: white;
-    width: 100%; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .icon {
-    width: 20px; 
-    height: 20px; 
-    margin-right: 10px; 
-    vertical-align: middle; 
-    transform: rotate(270deg); 
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
 }
 
 .historyContainer {
-    max-width: 900px;
-    width: 100%;
-}
-
-.blockContainer {
-    padding: 20px;
-    background-color: var(--dark-deep); 
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.blockHeader {
     display: flex;
-    flex-direction: column; 
-    align-items: flex-end; 
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.responseContainer {
-    display: flex; /* Use flexbox for the response container */
-    align-items: center; /* Center the SVG and text vertically */
+.conversationBox {
+    background-color: #999999;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-h3 {
-    font-weight: bold;
+.conversationBox:hover {
+    background-color: #f1f1f1;
+}
+
+.conversationHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.conversationDate {
+    font-size: 0.9em;
+    color: #888;
+}
+
+.conversationPreview {
+    font-size: 1em;
     color: #ffffff;
 }
-
-p {
-    color: #ffffff;
-    margin-left: 5px; /* Optional: Add margin for space between SVG and text */
+.backround {
+    background-color: #2f2f2f;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-.blockDate {
-    font-size: 12px;
-    color: #ffffff;
-}
-
-
-

@@ -1,26 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './History.module.css'; 
 import { ReactSVG } from 'react-svg';
 import testSVG from '../../assets/svg/Rainbow.svg'; 
 
 const History = () => {
-    const [history, setHistory] = useState([
-        { 
-            question: 'What is React?', 
-            response: 'React is a JavaScript library for building user interfaces.',
-            date: '2024-10-18'
-        },
-        { 
-            question: 'What is JSX?', 
-            response: 'JSX stands for JavaScript XML.',
-            date: '2024-10-17'
-        },
-        { 
-            question: 'How does useState work?', 
-            response: 'It allows you to add state to functional components.',
-            date: '2024-10-16'
-        }
-    ]);
+    const [history, setHistory] = useState([]);
+    const navigate = useNavigate();
+    const jwt = require('jsonwebtoken');
+
+    useEffect(() => {
+        console.log("History component mounted");
+        // Fetch conversation history from the backend
+        const fetchHistory = async () => {
+            try {
+                const response = await fetch('/api/conversations', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer jwt' , // Replace with your actual JWT
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log("Fetched history:", data);
+                setHistory(data);
+            } catch (error) {
+                console.error('Error fetching history:', error);
+            }
+        };
+
+        fetchHistory();
+    }, []);
+
+    const handleConversationClick = (conversationId) => {
+        navigate(`/chat/${conversationId}`);
+    };
 
     return (
         <div className={styles.pageContainer}>
@@ -29,34 +46,26 @@ const History = () => {
                 <h1>History</h1>
             </header>
             <div className={styles.historyContainer}>
-                {history.map((entry, index) => (
-                    <Block 
-                        key={index} 
-                        question={entry.question} 
-                        response={entry.response} 
-                        date={entry.date} 
-                    />
+                {history.length === 0 && <p>No conversation history available.</p>}
+                {history.map((conversation) => (
+                    <div 
+                        key={conversation._id} 
+                        className={styles.conversationBox} 
+                        onClick={() => handleConversationClick(conversation._id)}
+                    >
+                        <div className={styles.conversationHeader}>
+                            <span className={styles.conversationDate}>
+                                {new Date(conversation.timestamp).toLocaleString()}
+                            </span>
+                        </div>
+                        <div className={styles.conversationPreview}>
+                            {conversation.messages.length > 0 ? conversation.messages[0].text : 'No messages'}
+                        </div>
+                    </div>
                 ))}
             </div>
         </div>
     );
 };
 
-// Block component for each question-response pair
-const Block = ({ question, response, date }) => {
-    return (
-        <div className={styles.blockContainer}>
-            <div className={styles.blockHeader}>
-                <span className={styles.blockDate}>{date}</span>
-            </div>
-            <h3>Question: {question}</h3>
-            <div className={styles.responseContainer}>
-                <ReactSVG src={testSVG} className={styles.icon} />
-                <p>{response}</p>
-            </div>
-        </div>
-    );
-};
-
 export default History;
-
