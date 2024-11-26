@@ -8,6 +8,7 @@ import History from './pages/History/History';
 import Login from './pages/Login/Login';
 import RequireLogin from './pages/Redirects/RequireLogin';
 import Page404 from './pages/Redirects/Page404';
+import Options from './pages/Options/Options';
 import { useAuthContext } from './context/AuthContext';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path = "/history" element = {user? <History/>:<RequireLogin/>}></Route>
           <Route path = "/accessibility" element = {<Accessibility/>}></Route>
           <Route path = "/login" element = {<Login/>}></Route>
+          <Route path = "/options" element = {<Options/>}></Route>
           <Route path="*" element={<Page404/>} />
         </Routes>
        </div>

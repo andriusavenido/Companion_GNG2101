@@ -6,13 +6,20 @@
   font-weight: 400;
 
   color-scheme: dark;
-  color: #FFFFFF;
-  background-color: #1F1F1F;
+  
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /** High Contrast Theme Variables **/
+
+--high-contrast-background: #000000; /* Black background */
+--high-contrast-font: #FFFFFF; /* White font */
+--high-contrast-accent: #FFFF00; /* Yellow accent for emphasis */
+--high-contrast-hover: #FF0000; /* Red for hover for high visibility */
+--high-contrast-link: #00FF00; /* Bright green for links */
 
   /**Style Variables **/
   --rutgers-red: #CC0033;
@@ -28,11 +35,30 @@
 
   --main-font: "Sofia Sans", sans-serif;
 
+  /** OPTIONS TO CHANGE**/
+  --var-bg-color:var(--background-dark);
+  --var-bg-accent: var(--dark-deep);
+  --var-logo-color:var(--rutgers-red);
+  --var-font-color:var(--white-main);
+  --var-speech-color:var(--white-main);
+  --var-font-side-color:var(--white-main);
+  --var-hover-color:var(--lighter-dark);
+  --var-rutgers-color:var(--rutgers-red);
+
+  background-color:var(--var-bg-color);
+
 }
 
 body{
   margin: 0px;
   padding: 0px;
+  
+}
+input:focus, 
+textarea:focus, 
+select:focus,select {
+  outline: none; /* Removes the focus outline */
+  border: none;  /* Removes the border */
 }
 
 *{

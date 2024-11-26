@@ -1,0 +1,32 @@
+.options label{
+    color:var(--var-font-color);
+}
+
+.options {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+ .options label {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+ .options select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color:var(--var-bg-accent);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color:var(--var-speech-color);
+    cursor: pointer;
+  }
+  .options option{
+    color:var(--var-speech-color);
+  }
+  
+ .options select:focus {
+    outline: none;
+  }

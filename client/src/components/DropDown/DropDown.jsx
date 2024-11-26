@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Dropdown.module.css';
 
-const Dropdown = ({ title, children }) => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggleDropdown = () => {
-        setIsOpen(!isOpen);
-    };
-
+const Dropdown = ({ title, children, isOpen, onToggle }) => {
     return (
         <div className={styles.dropdown}>
-            <div className={styles.dropdownTitle} onClick={toggleDropdown}>
+            {/* Title Section */}
+            <div
+                className={styles.dropdownTitle}
+                onClick={onToggle}
+                role="button"
+                tabIndex={0}
+                aria-expanded={isOpen}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') onToggle();
+                }}
+            >
                 {title}
             </div>
+            {/* Content Section */}
             <div className={`${styles.dropdownContent} ${isOpen ? styles.open : ''}`}>
-                {children}
+                {isOpen && children}
             </div>
         </div>
     );

@@ -7,6 +7,12 @@
     
 }
 
+.page p, .page h1,.page h2,.page ul, .page li,.page strong,.page span
+{
+    color: var(--var-font-color);
+}
+
+
 .introduction{
     margin: 0;
     flex: 1;
@@ -60,12 +66,13 @@
     font-size: 18px;
     padding: 1rem;
     border: none;
-    background-color: var(--dark-deep);
+    background-color: var(--var-bg-accent);
     border-radius: 12px;
 }
 
 .page input{
     font-family: var(--main-font);
+    color: var(--var-speech-color);
 }
 
 .fileDrop{
@@ -73,9 +80,9 @@
     flex: 0.1 0 auto;
     flex-direction: column;
     align-items: center;
-    font-weight: 100;
+    font-weight: 300;
     font-size: 14px;
-    background-color: var(--dark-deep);
+    background-color: var(--var-bg-accent);
     border-radius: 12px;
     padding: 4px;
     cursor: pointer;
@@ -86,12 +93,16 @@
     height: 100%;
 }
 
+.fileDrop p{
+    color: var(--var-speech-color);
+}
+
 
 .deleteButton{
     width: 10rem;
     margin:0 auto;
     border-bottom: none;
-    background-color: var(--dark-deep);
+    background-color: var(--var-bg-accent);
     border-radius: 5px;
     border:none;
     font-weight: 100;
@@ -101,7 +112,7 @@
 }
 
 .deleteButton:hover, .fileDrop:hover{
-    background-color: var(--lighter-dark);
+    background-color: var(--var-hover-color);
 }
 
 /*Message Styles*/
@@ -136,16 +147,24 @@
 .bot{
     align-self: flex-start;
     border-bottom-left-radius: 0;
-    background-color: var(--dark-deep);
+    background-color: var(--var-bg-accent);
+    color: var(--var-speech-color);
+}
+.bot p{
+    color: var(--var-speech-color);
+}
+
+.bot p, .bot h1,.bot h2,.bot ul, .bot li,.bot strong,.bot span{
+    color: var(--var-speech-color);
 }
 .user{
-    background-color: var(--rutgers-red);
+    background-color: var(--var-rutgers-color);
     align-self: flex-end;
     border-bottom-right-radius: 0;
 }
 
 .loading{
-    background-color: var(--dark-deep);
+    background-color: var(--var-bg-accent);
     font-weight: 100;
 }
 

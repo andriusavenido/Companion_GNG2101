@@ -1,8 +1,11 @@
 
+.Accessibility p, h1, ul, li, a{
+    color:var(--var-font-color);
+}
 .h1 {
     font-size: 30px;
     font-family: 'Roboto', sans-serif;
-    color: rgb(255, 255, 255); /* Change text color */
+    color:var(--var-font-color);
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 20px;
@@ -32,7 +35,9 @@ transition: transform 0.3s, background-color 0.3s; /* Animation on hover */
     text-align: justify;
 }
 
-.a{
+.Accessibility a{
     text-decoration: none; /* Remove underline */
-    color: inherit; /* Inherit color from parent */
+}
+iframe{
+    margin-left: 20vh;
 }

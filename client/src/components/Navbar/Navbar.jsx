@@ -10,6 +10,7 @@ import history from "../../assets/svg/Notebook.svg";
 import info from "../../assets/svg/Info.svg";
 import userIcon from "../../assets/svg/User_02.svg";
 import planet from "../../assets/svg/Planet.svg";
+import gear from "../../assets/svg/Settings.svg"
 import { ReactSVG } from "react-svg";
 import { useAuthContext } from "../../context/AuthContext";
 import { useLoginSignup } from "../../hooks/useLoginSignup";
@@ -72,6 +73,12 @@ const Navbar = () => {
             <Link to="/accessibility" className={styles.menuLink}>
               <ReactSVG src={info} />
               {isExpanded && <span>Learn about Accessibility</span>}
+            </Link>
+          </li>
+          <li>
+            <Link to="/options" className={styles.menuLink}>
+              <ReactSVG src={gear} />
+              {isExpanded && <span>Settings</span>}
             </Link>
           </li>
           <li>
