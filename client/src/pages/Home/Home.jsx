@@ -4,8 +4,13 @@ import uploadIcon from "../../assets/svg/File_Add.svg";
 import styles from "./Home.module.css";
 import { useEffect, useRef, useState } from "react";
 import useChatHandler from "../../hooks/useChatHandler";
+import { useAuthContext } from '../../context/AuthContext';
+import useHistoryManager from "../../hooks/useHistoryManager";
+import { useHistoryContext } from "../../context/HistoryContext";
 
 const Home = ({}) => {
+  
+  const {user}=useAuthContext();
   const [beganConversation, setBeganConversation] = useState(false);
   const {
     messages,
@@ -17,8 +22,14 @@ const Home = ({}) => {
     responseIsLoading
   } = useChatHandler();
 
+  const {messageHistory} = useHistoryContext();
+  const{createConversation} = useHistoryManager();
+
   const messagesEndRef = useRef(null); //reference used to snap to for scrolling
   const fileInputRef = useRef(null); //reference for file input
+  const [saved, setSaved]=useState(false);
+
+  
 
   //enter key
   const handleKeyDown = (e) => {
@@ -33,9 +44,16 @@ const Home = ({}) => {
   };
 
   useEffect(()=>{
+    if(messageHistory.length>0){
+      setBeganConversation(true);
+    }
+  },[messageHistory]);
+
+  useEffect(()=>{
     if (messagesEndRef.current){
       messagesEndRef.current.scrollIntoView({behaviour:"smooth"});
     }
+    setSaved(false);
   },[messages])
 
   const handleDragOver = (e) => {
@@ -62,6 +80,15 @@ const Home = ({}) => {
   const handleUploadClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
+    }
+  };
+
+  const handleSaveConversation = async () => {
+    try {
+      await createConversation(messages); // Wait for the conversation to be created
+      setSaved(true); // Set saved state only after the creation is successful
+    } catch (error) {
+      console.error("Error saving conversation:", error);
     }
   };
 
@@ -145,11 +172,17 @@ const Home = ({}) => {
           {!uploadedFile && <p>Upload .csv file</p>}
         </div>
       </div>
-      {uploadedFile && (
+      <div className={styles.controlbar}>
+        {beganConversation && user &&
+        <button className={styles.savebutton} disabled={messages.length<2 || saved} onClick={handleSaveConversation}>{saved?"Saved!":"Save Conversation"}</button>
+        }
+        {uploadedFile && (
         <button className={styles.deleteButton} onClick={clearUpLoadedFile}>
           Delete uploaded file
         </button>
       )}
+      </div>
+      
     </div>
   );
 };

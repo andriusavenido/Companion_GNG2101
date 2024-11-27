@@ -1,0 +1,38 @@
+.Conversation {
+    background-color: var(--var-bg-accent);
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners for a modern feel */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow to make it stand out */
+    margin: 10px 0; /* Spacing between conversations */
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Space between elements inside the conversation */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
+   
+}
+
+.Conversation p, .Conversation h2{
+    color:var(--var-speech-color);
+}
+
+.Conversation:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+}
+
+.deleteButton{
+    width: 10rem;
+    margin:0 1rem 0.1cm;
+    border-bottom: none;
+    padding: 0.1em;
+    background-color: var(--var-bg-accent);
+    border:none;
+    border-radius: 0.5rem;
+    font-size: 14px;
+    font-family: var(--main-font);
+    color:var(--var-speech-color);
+    cursor: pointer;
+}
+.Conversation button:hover{
+    background-color:var(--var-bg-accent) ;
+}

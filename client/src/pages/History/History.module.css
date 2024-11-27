@@ -1,70 +1,15 @@
 .pageContainer {
-    padding: 20px;
-    background-color: #2f2f2f;
+    background-color: --var-bg-color;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 80vh;
 }
 
-.header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.icon {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-}
-
-.historyContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-}
-
-.blockContainer {
-    padding: 20px;
-    background-color: var(--var-bg-accent);
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-.conversationBox:hover {
-    background-color: #f1f1f1;
-}
-
-.conversationHeader {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.responseContainer {
-    display: flex; /* Use flexbox for the response container */
-    align-items: center; /* Center the SVG and text vertically */
-}
-
-h3 {
-    font-weight: bold;
-    color: var(--var-speech-color);
-}
-.backround {
-    background-color: #2f2f2f;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-p {
-    color: var(--var-speech-color);
-    margin-left: 5px; /* Optional: Add margin for space between SVG and text */
-}
-
-.blockDate {
-    font-size: 12px;
-    color: var(--var-speech-color);
+.conversationList {
+    height: 80vh; /* Keeps the height constrained */
+    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-x: hidden; /* Hides horizontal overflow */
+    padding-right: 10px; /* Optional: Add some padding for better scroll visibility */
 }

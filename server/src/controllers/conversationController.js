@@ -13,16 +13,16 @@ const getAllConversationsByUser = async (req, res) => {
 }
 
 const createConversation = async (req, res) => {
-    const { messages, timestamp } = req.body;
+    const { title, messages, timestamp } = req.body;
     const user_id = req.user._id;
 
     // Ensure messages array is not empty and contains valid message objects
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
-        return res.status(400).json({ error: 'Messages array is required and cannot be empty' });
+        return res.status(400).json({ error: 'Invalid message objects in array' });
     }
 
     try {
-        const conversation = await Conversation.create({ user_id, messages, timestamp });
+        const conversation = await Conversation.create({ user_id, title, messages, timestamp });
         res.status(200).json(conversation);
     } catch (err) {
         res.status(400).json({ error: err.message });
