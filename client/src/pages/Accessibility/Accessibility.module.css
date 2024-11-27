@@ -1,38 +1,58 @@
-
-.h1 {
-    font-size: 30px;
-    font-family: 'Roboto', sans-serif;
-    color: rgb(255, 255, 255); /* Change text color */
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+:root {
+    --accessibility-width: 166vh; /* Default width */
+  }
+  
+  .Accessibility {
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
     text-align: center;
-}
-
-.guideline{
-border: wpx solid #000000;
-border-radius: 10px;
-padding: 10px;
-margin: 10px;
-text-align: center;
-transition: transform 0.3s, background-color 0.3s; /* Animation on hover */
-
-}
-
-.guideline:hover{
+  
+    /* Dynamically controlled width */
+    width: var(--accessibility-width); /* Dynamic width */
+    min-height: 100vh;
+  
+    /* Background styling */
+    background-image: url('../../assets/svg/Webpage.svg');
+    background-size: cover; /* Keep image covering the container */
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    transition: width 0.3s ease; /* Smooth transition for width */
+  }
+  
+  .h1 {
+    font-size: 40px;
+    font-family: 'Roboto', sans-serif;
+    color: rgb(255, 255, 255); /* White text */
+    margin-bottom: 20px; /* Space below title */
+  }
+  
+  .guidelines {
+    list-style: none; /* Remove bullets */
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Let buttons take up available width */
+    max-width: 400px; /* Limit width for better appearance */
+  }
+  
+  .guideline {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0; /* Add vertical spacing */
+    text-align: center;
+    transition: transform 0.3s, background-color 0.3s;
+  }
+  
+  .guideline:hover {
     transform: scale(1.05);
     background-color: #c2c0c0;
-}
-.Accessibility{
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: justify;
-}
-
-.a{
+  }
+  
+  .a {
     text-decoration: none; /* Remove underline */
     color: inherit; /* Inherit color from parent */
-}
+  }
+  
