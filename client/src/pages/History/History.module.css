@@ -1,29 +1,28 @@
 .pageContainer {
+    padding: 20px;
+    background-color: #2f2f2f;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    width: 750px;
+    align-items: center;
 }
 
 .header {
-    color: white;
-    width: 100%; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .icon {
-    width: 20px; 
-    height: 20px; 
-    margin-right: 10px; 
-    vertical-align: middle; 
-    transform: rotate(270deg); 
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
 }
 
 .historyContainer {
-    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
 }
 
@@ -34,10 +33,14 @@
     margin-bottom: 15px;
 }
 
-.blockHeader {
+.conversationBox:hover {
+    background-color: #f1f1f1;
+}
+
+.conversationHeader {
     display: flex;
-    flex-direction: column; 
-    align-items: flex-end; 
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .responseContainer {
@@ -49,7 +52,13 @@ h3 {
     font-weight: bold;
     color: var(--var-speech-color);
 }
-
+.backround {
+    background-color: #2f2f2f;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 p {
     color: var(--var-speech-color);
     margin-left: 5px; /* Optional: Add margin for space between SVG and text */
@@ -59,6 +68,3 @@ p {
     font-size: 12px;
     color: var(--var-speech-color);
 }
-
-
-

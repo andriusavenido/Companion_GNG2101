@@ -18,24 +18,35 @@ import { useLoginSignup } from "../../hooks/useLoginSignup";
 const Navbar = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const navigate = useNavigate();
-  const {user} = useAuthContext();
-  const {signout} = useLoginSignup();
+  const { user } = useAuthContext();
+  const { signout } = useLoginSignup();
 
   const toggleBar = () => {
     setIsExpanded(!isExpanded);
-  };
+  
+    document.documentElement.style.setProperty(
+      "--accessibility-width",
+      isExpanded ? "199vh" : "166vh"
+    );
 
-  //fix this later
-  const handleCreateNew = (e) =>{
+    document.documentElement.style.setProperty(
+      "--login-background-width",
+      isExpanded ? "199vh" : "166vh"
+    );
+  };
+  
+  
+
+  const handleCreateNew = (e) => {
     e.preventDefault();
     navigate("/");
     window.location.reload();
-  }
+  };
 
-  const handleSignOut = ()=>{
+  const handleSignOut = () => {
     signout();
     navigate("/");
-  }
+  };
 
   return (
     <div
@@ -84,13 +95,16 @@ const Navbar = () => {
           <li>
             <Link to={user?"":"/login"} className={styles.menuLink}>
               <ReactSVG src={userIcon} />
-              {isExpanded && <span>{user?user.username:"Login"}</span>}
+              {isExpanded && <span>{user ? user.username : "Login"}</span>}
             </Link>
           </li>
-          {user &&isExpanded&&<li><Link onClick={handleSignOut} className={styles.menuLink}>
-              <span>Sign Out</span>
-            </Link>
-             </li>}
+          {user && isExpanded && (
+            <li>
+              <Link onClick={handleSignOut} className={styles.menuLink}>
+                <span>Sign Out</span>
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
       <Link to="/about" className={`${styles.menuLink} ${styles.aboutLink}`}>

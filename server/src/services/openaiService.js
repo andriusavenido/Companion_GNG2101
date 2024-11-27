@@ -1,3 +1,4 @@
+
 const { OpenAI } = require('openai');
 
 // Initialize OpenAI with the API key

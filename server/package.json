@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "csv": "^6.3.10",
     "csv-parse": "^5.5.6",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
@@ -19,6 +20,7 @@
     "mongoose": "^8.7.1",
     "multer": "^1.4.5-lts.1",
     "openai": "^4.70.3",
+    "parse": "^3.5.1",
     "validator": "^13.12.0"
   },
   "devDependencies": {

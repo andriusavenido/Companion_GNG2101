@@ -1,20 +1,42 @@
+:root {
+    --login-background-width: 166vh; /* Default width */
+  }
+  
+  .LoginBackground {
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center children vertically */
+    align-items: center; /* Center children horizontally */
+    text-align: center; /* Center text inside the container */
+  
+    background-image: url('../../assets/svg/Webpage.svg'); /* SVG background */
+    background-position: center; /* Center the SVG */
+    background-repeat: no-repeat; /* Avoid repetition */
+    background-size: cover; /* Ensure the image covers the entire container */
+    min-height: 100vh;
+  
+    width: var(--login-background-width); /* Use the new CSS variable for width */
+    transition: width 0.3s ease; /* Smooth transition for width */
+  }
+  
+
 .LoginBox {
     padding: 20px;
-    background: linear-gradient(180deg,var(--rutgers-red), var(--rutgers-shadow-red));
+    background: linear-gradient(180deg, var(--rutgers-red), var(--rutgers-shadow-red));
     border-radius: 10px;
     width: 300px;
     height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; 
-    text-align: center; 
+    justify-content: center;
+    text-align: center;
 }
 
 .LoginBox h2 {
     padding-bottom: 20px;
     font-size: 30px;
-    margin: 0; 
+    margin: 0;
 }
 
 .Input {
@@ -37,26 +59,32 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    max-width: 250px;  
-    margin-top: 60px;  
+    max-width: 250px;
+    margin-top: 60px;
 }
 
 .Button {
     padding: 10px;
-    width: 250px;  
+    width: 250px;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin: 0 20px; 
-    margin-bottom: 75px; 
+    margin: 0 20px;
+    margin-bottom: 75px;
     margin-top: 10px;
 }
 
 .Button:hover {
     background-color: #45a049;
 }
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
 
 
 

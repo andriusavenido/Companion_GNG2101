@@ -1,4 +1,5 @@
 import styles from './Accessibility.module.css';
+import background from "../../assets/svg/Webpage.svg";
 
 const Accessibility = () => {
     return (
