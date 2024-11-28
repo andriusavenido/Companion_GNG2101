@@ -18,8 +18,8 @@ const About = () => {
     };
 
     return (
-        <div className="about">
-            <h1 className={styles.h1}>About us/ FAQ</h1>
+        <div className={styles.about}>
+            <h1 className={styles.h1}>About us / FAQ</h1>
             <Dropdown
                 title="What is this site?"
                 isOpen={openDropdowns.includes('What is this site?')}
@@ -29,7 +29,7 @@ const About = () => {
                     This tool was designed and created by 5 University of Ottawa students.
                     This tool aims to provide professors with specialized help to make
                     their courses more accessible. We work with Ally LMS Tool Integration.
-                    Whether it's a CVS file or a simple question, this tool can help!
+                    Whether it's a CSV file or a simple question, this tool can help!
                 </p>
             </Dropdown>
             <Dropdown
@@ -73,3 +73,4 @@ const About = () => {
 };
 
 export default About;
+
